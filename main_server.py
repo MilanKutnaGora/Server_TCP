@@ -56,14 +56,14 @@ class Server:
             if random.random() < IGNORE_PROBABILITY:
                 self.log_request_response(request, "(проигнорировано)")
             else:
-                response_delay = random.uniform(0.1, 1.0)
-                await asyncio.sleep(response_delay)
+                response_delay = random.uniform(0.1,1,0)
+                asyncio.sleep(response_delay)
                 self.response_count += 1
                 response_text = f"[{self.response_count}] {self.response_count}/{request_num} PONG ({client_id})"
                 self.log_request_response(request, response_text)
                 for reader, writer in self.clients:
                     writer.write(f"{response_text}\n".encode())
-                    await writer.drain()
+                    writer.drain()
         else:
             print(f"Received unknown request: {request}")
 
@@ -96,6 +96,6 @@ class Server:
         async with server:
             await server.serve_forever()
 
-if __name__ == "__main__":
+if __name__ == "__main_server__":
     server = Server()
     asyncio.run(server.run())

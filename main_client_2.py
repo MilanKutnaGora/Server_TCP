@@ -58,6 +58,6 @@ class Client:
         with open(CLIENT_LOG_FILE, "a") as f:
             f.write(f"{request_time};{request};{response_time};{response}\n")
 
-if __name__ == "__main__":
+if __name__ == "__main_client_2__":
     client = Client()
     asyncio.run(client.run())
